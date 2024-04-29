@@ -4,20 +4,20 @@ import './Login.css'; // Impor file CSS untuk gaya tambahan
 
 function BottomNav() {
     const descriptionStyle = {
-        backgroundColor: '#ff9104',
+        backgroundColor: '#06b6d4',
         fontWeight: 'bold',
     };
   return (
-    <div className="container-bottom fixed bottom-0 left-0 right-0 p-4 flex justify-around border-t border-gray-300" style={descriptionStyle}>
-        <Link to="/onprogress" className="text-white-500 focus:outline-none hover:scale-105 transform transition-transform duration-300">
+    <div className="fixed bottom-0 left-0 right-0 flex justify-around p-4 border-t border-gray-300 container-bottom" style={descriptionStyle}>
+        <Link to="/onprogress" className="transition-transform duration-300 transform text-white-500 focus:outline-none hover:scale-105">
             <i className="fa fa-spinner"></i> ONPROGRESS
         </Link>
-        <Link to="/completed" className="text-white-500 focus:outline-none hover:scale-105 transform transition-transform duration-300">
+        <Link to="/completed" className="transition-transform duration-300 transform text-white-500 focus:outline-none hover:scale-105">
             <i className="fa fa-check-square-o"></i> COMPLETED
         </Link>
-        <button className="text-white-500 focus:outline-none hover:scale-105 transform transition-transform duration-300">
-            LOGOUT
-        </button>
+        <Link to="/" className="transition-transform duration-300 transform text-white-500 focus:outline-none hover:scale-105">
+            <i className="fa fa-check-square-o"></i> LOGOUT
+        </Link>
     </div>
   );
 }

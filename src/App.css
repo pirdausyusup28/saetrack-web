@@ -3,6 +3,12 @@
 @tailwind utilities;
 .App {
   text-align: center;
+  /* background-image: url('./image/logodepan.png'); */
+}
+
+.logo-container {
+  text-align: center;
+  /* background-image: url('./image/logodepan.png'); */
 }
 
 .App-logo {

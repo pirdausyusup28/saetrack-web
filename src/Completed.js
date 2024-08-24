@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Scanner from "./Scanner";
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import Webcam from 'react-webcam';
-import { Button, Card, Select, Label, TextInput, Spinner, Textarea } from 'flowbite-react';
+import { Button, Card, Select, Label, TextInput, Spinner, FileInput } from 'flowbite-react';
 import BottomNav from './BottomNav';
 import 'react-html5-camera-photo/build/css/index.css';
 // import "./styles.css";
@@ -30,6 +30,9 @@ function Completed() {
     // const webcamRef2 = useRef(null);
     const [capturedImage2, setCapturedImage2] = useState(null);
     const [cameraIsActive2, setCameraIsActive2] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const fileInputRef = useRef(null);
+    const fileInputRef2 = useRef(null);
 
     const [camera, setCamera] = useState(false);
     const [result, setResult] = useState(null);
@@ -56,6 +59,40 @@ function Completed() {
       setShowVideo(true); // Set showVideo to true when the camera is active
     };    
 
+    const pilihimage = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setCapturedImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    const handleButtonClick = () => {
+      if (fileInputRef.current) {
+        fileInputRef.current.click(); // Trigger file input click
+      }
+    };
+
+    const pilihimage2 = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setCapturedImage2(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    const handleButtonClick2 = () => {
+      if (fileInputRef2.current) {
+        fileInputRef2.current.click(); // Trigger file input click
+      }
+    };
+
     const toggleCamera2 = () => {
         setCameraIsActive2(!cameraIsActive2); // Mengubah status kamera
     };
@@ -73,7 +110,7 @@ function Completed() {
 
   const getData = async () => {
     try {
-      const response = await axios.post('https://tribatama.iconicbase.com/restapi/cekdata_web.php', {
+      const response = await axios.post('https://sae.iconicbase.com/restapi/cekdata_web.php', {
         noawb: noawb
       });
 
@@ -112,7 +149,7 @@ function Completed() {
     console.log(latitude);
     console.log(longitude);
     try {
-      const response = await axios.post('https://tribatama.iconicbase.com/restapi/simpandata2_web.php', {
+      const response = await axios.post('https://sae.iconicbase.com/restapi/simpandata2_web.php', {
         no_awb: noawb,
         id_kota_tujuan: Iddst,
         keterangan: diterimaoleh,
@@ -161,7 +198,7 @@ function Completed() {
   }, []);
 
   const descriptionStyle = {
-    backgroundColor: '#06b6d4',
+    backgroundColor: 'orange',
     fontSize: '10px',
   };
 
@@ -268,7 +305,25 @@ function Completed() {
               )}
 
             </div>
-              <Button onClick={toggleCamera} disabled={isButtonDisabled}>{capturedImage ? 'Ubah Photo 1' : 'Photo 1'}</Button>
+              <div className='flex'>
+              <Button style={{ width: '200px', margin:'1px' }} onClick={toggleCamera} disabled={isButtonDisabled}>{capturedImage ? 'Ubah Photo 1' : 'Photo 1'}</Button>
+              <Button 
+                onClick={handleButtonClick} 
+                disabled={isButtonDisabled} // Disable button based on condition
+              >
+                Pilih Gambar 1
+              </Button>
+              <div>
+                <FileInput 
+                    id="upload-image" 
+                    onChange={pilihimage} 
+                    accept="image/*" 
+                    style={{ display: 'none' }} // Hide the file input
+                    ref={fileInputRef} 
+                    disabled={isButtonDisabled}
+                  />
+              </div>
+              </div>
             <div>
                 {cameraIsActive2 ? (
                   <Camera
@@ -280,7 +335,25 @@ function Completed() {
                   <img src={capturedImage2} alt="" />
                 )}
             </div>
-            <Button onClick={toggleCamera2} disabled={isButtonDisabled2}>{capturedImage2 ? 'Ubah Photo 2' : 'Photo 2'}</Button>
+            <div className='flex'>
+              <Button style={{ width: '200px', margin:'1px' }}  onClick={toggleCamera2} disabled={isButtonDisabled2}>{capturedImage2 ? 'Ubah Photo 2' : 'Photo 2'}</Button>
+              <Button 
+                  onClick={handleButtonClick2} 
+                  disabled={isButtonDisabled2} // Disable button based on condition
+                >
+                  Pilih Gambar 2
+                </Button>
+                <div>
+                  <FileInput 
+                      id="upload-image" 
+                      onChange={pilihimage2} 
+                      accept="image/*" 
+                      style={{ display: 'none' }} // Hide the file input
+                      ref={fileInputRef2} 
+                      disabled={isButtonDisabled2}
+                    />
+                </div>
+            </div>
             <Button onClick={simpanData} disabled={isButtonDisabled2}>Simpan Data</Button>
         </form>
     </Card>

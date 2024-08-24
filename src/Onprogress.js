@@ -44,7 +44,7 @@ function Onprogress() {
 
   const getData = async () => {
     try {
-      const response = await axios.post('https://tribatama.iconicbase.com/restapi/cekdata_web.php', {
+      const response = await axios.post('https://sae.iconicbase.com/restapi/cekdata_web.php', {
         noawb: noawb
       });
 
@@ -72,7 +72,7 @@ function Onprogress() {
 
   const getShipment = async () => {
     try {
-      const response = await axios.get('https://tribatama.iconicbase.com/restapi/shipment_web.php');
+      const response = await axios.get('https://sae.iconicbase.com/restapi/shipment_web.php');
       setData(response.data.data);
       console.log(response.data.data);
      
@@ -101,7 +101,7 @@ function Onprogress() {
   const simpanData = async () => {
     setIsButtonDisabled(true); // Menonaktifkan tombol saat mengirim data
     try {
-      const response = await axios.post('https://tribatama.iconicbase.com/restapi/simpandata_web.php', {
+      const response = await axios.post('https://sae.iconicbase.com/restapi/simpandata_web.php', {
         noawb: noawb,
         jenis_shipment: selectedValue,
         keterangan: keterangan,
@@ -147,7 +147,7 @@ function Onprogress() {
   }, []);
 
   const descriptionStyle = {
-    backgroundColor: '#06b6d4',
+    backgroundColor: 'orange',
     fontSize: '10px',
   };
 

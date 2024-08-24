@@ -4,7 +4,7 @@ import './Login.css'; // Impor file CSS untuk gaya tambahan
 
 function BottomNav() {
     const descriptionStyle = {
-        backgroundColor: '#06b6d4',
+        backgroundColor: 'orange',
         fontWeight: 'bold',
     };
   return (

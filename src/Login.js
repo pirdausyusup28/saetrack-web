@@ -17,7 +17,7 @@ const Login = () => {
     console.log(username);
     console.log(password);
     try {
-      const response = await axios.post('https://tribatama.iconicbase.com/restapi/login_web.php', {
+      const response = await axios.post('https://sae.iconicbase.com/restapi/login_web.php', {
         username: username,
         password: password,
       });
@@ -41,7 +41,7 @@ const Login = () => {
     <div className="login-container">
       <div className="card-container">
       <div className="card">
-        <h3 className="card-title">TRIBATAMA</h3>
+        <h3 className="card-title">SAE TRACK</h3>
         <div className="form-container">
           <input
             id="username"
